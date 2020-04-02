@@ -48,6 +48,12 @@
                             <p:outputLabel for="txtNombre" value="Nombre"/>
                             <p:inputText id="txtNombre" required="true" disabled="#{sesionInfante.deshabilitarFormulario}"
                                          value="#{sesionInfante.infante.nombre}"   />
+         
+                           <p:outputLabel value="Genero"/>
+                           <p:selectOneMenu value="#{sesionInfante.infante.genero}" disabled="#{sesionInfante.deshabilitarFormulario}">
+                                <f:selectItem itemLabel="Masculino" itemValue="M"/>
+                                <f:selectItem itemLabel="Femenino" itemValue="F"/>
+                            </p:selectOneMenu>
                             <p:outputLabel for="spEdad" value="Edad"/>
                             <p:spinner id="spEdad" required="true" min="1" max="7" disabled="#{sesionInfante.deshabilitarFormulario}"
                                        value="#{sesionInfante.infante.edad}"/>
@@ -70,9 +76,7 @@
                                              update="frmInfante"/>       
                             <p:commandButton value="Último" action="#{sesionInfante.irUltimo()}" 
                                              update="frmInfante"/>                           
-                            
-                            
-                            
+                           
                         </p:panelGrid>
                     </p:panel>
                     
@@ -94,22 +98,36 @@
                                 </f:facet>
                                 <p:outputLabel value="#{inf.nombre}"/>
                             </p:column>
+ 
+                            
+                            <p:column>
+                                <f:facet name="header">
+                                    <p:outputLabel value="Genero"/>
+                                </f:facet>
+                                <p:outputLabel value="#{inf.genero}"/>
+                            </p:column>
+                            
                             <p:column>
                                 <f:facet name="header">
                                     <p:outputLabel value="Edad"/>
                                 </f:facet>
                                 <p:outputLabel value="#{inf.edad}"/>
                             </p:column>
+
                         </p:dataTable>
+                         <p:commandButton value="Invertir Listas" action="#{sesionInfante.invertirLista()}" 
+                                             update="frmInfante"/>
                         
-                        <p:diagram rendered="#{sesionInfante.textoVista=='Tabla'}" value="#{sesionInfante.model}" style="height:600px; width: 800px;" styleClass="ui-widget-content" />
+                        <p:diagram rendered="#{sesionInfante.textoVista=='Tabla'}" value="#{sesionInfante.model}" 
+                                   style="height:600px; width: 800px;" styleClass="ui-widget-content" />
+                        
                         
                     </p:panel>
 
                 </p:panelGrid>
                 <p:outputLabel value="#{sesionInfante.listaInfantes.obtenerListadoInfantes()}"/>
+                
             </p:panel>
         </h:form>
     </h:body>
 </html>
-
